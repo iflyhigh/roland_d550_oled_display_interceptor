@@ -3,8 +3,8 @@
  * ===========================================================
  * Version 1.0 / 20230405 by Andrew Evdokimov i at iflyhigh ru
  * Creative Commons Attribution 4.0 International  (CC BY 4.0) 
- * 
  */
+
 #define PCWAIT 25 // number of cycles to delay during data write
 #define DDRB_MASK B00110000 // 0=input 1=output
 #define DDRC_MASK B00111111
