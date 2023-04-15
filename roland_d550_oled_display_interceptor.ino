@@ -11,18 +11,18 @@
 #define DDRD_MASK B00000011
 /*
  * input map optimized for performance
- * LCD -> Arduino 
+ * D-550 -> Arduino 
  * --------------
- * D0  -> D8      PINB0
- * D1  -> D9      PINB1
- * D2  -> D10     PINB2
- * D3  -> D11     PINB3
- * D4  -> D4      PIND4
- * D5  -> D5      PIND5
- * D6  -> D6      PIND6
- * D7  -> D7      PIND7
- * RS  -> D3      PIND3
- * E   -> D2      PIND2
+ * D0    -> D8      PINB0
+ * D1    -> D9      PINB1
+ * D2    -> D10     PINB2
+ * D3    -> D11     PINB3
+ * D4    -> D4      PIND4
+ * D5    -> D5      PIND5
+ * D6    -> D6      PIND6
+ * D7    -> D7      PIND7
+ * RS    -> D3      PIND3
+ * E     -> D2      PIND2
  */
  
 // iD contains data received from MCU controlling LCD
@@ -32,18 +32,18 @@
 #define iEpin 2
 /*
  * output map optimized for performance
- * OLED-> Arduino 
+ * OLED -> Arduino 
  * --------------
- * D0  -> A0      PORTC0
- * D1  -> A1      PORTC1
- * D2  -> A2      PORTC2
- * D3  -> A3      PORTC3
- * D4  -> A4      PORTC4
- * D5  -> A5      PORTC5
- * D6  -> D12     PORTB4
- * D7  -> D13     PORTB5
- * RS  -> D1/TX   PORTD1
- * E   -> D0/RX   PORTD0
+ * D0   -> A0      PORTC0
+ * D1   -> A1      PORTC1
+ * D2   -> A2      PORTC2
+ * D3   -> A3      PORTC3
+ * D4   -> A4      PORTC4
+ * D5   -> A5      PORTC5
+ * D6   -> D12     PORTB4
+ * D7   -> D13     PORTB5
+ * RS   -> D1/TX   PORTD1
+ * E    -> D0/RX   PORTD0
  */
 
 void setup() {
