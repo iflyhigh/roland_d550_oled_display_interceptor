@@ -1,7 +1,7 @@
 /*
  * Arduino-based interceptor for Roland D-550 OLED display mod 
  * ===========================================================
- * Version 1.0 / 20230405 by Andrew Evdokimov i at iflyhigh ru
+ * Version 1.1 / 20230506 by Andrew Evdokimov i at iflyhigh ru
  * Creative Commons Attribution 4.0 International  (CC BY 4.0) 
  */
 
@@ -55,20 +55,26 @@ void setup() {
   PORTC = (0x0 & DDRC_MASK);
   PORTD = (0x0 & DDRD_MASK);
 
-  // MCU starts in ~70 msecs, we need to set OLED entry mode within first 300 msecs before Roland will start its own initialization
+  // MCU starts in ~70 msecs, we need to set entry mode on OLED within first 300 msecs before Roland will start its own initialization but also we need some time for OLED to boot
   delay(150);
-  
-  // set OLED entry mode no shift, increment (left to right)
-  PORTC = (0x6 & DDRC_MASK);
-  PORTB = (0 & DDRB_MASK);
-  // RS = 0 - this is command
-  PORTD = (B00000001 & DDRD_MASK);
-  wt(PCWAIT);
-  PORTD = (B00000000 & DDRD_MASK);
-  wt(PCWAIT);
 
+  // set OLED entry mode no shift, increment (left to right)
+  write_command(0x6, PCWAIT * 100);
+  // display clear
+  write_command(0x1, PCWAIT * 250);
   // now start copying input to output
   attachInterrupt(digitalPinToInterrupt(iEpin), intercept, FALLING);
+}
+
+void write_command(uint8_t cmd, uint16_t wait_time) {
+  PORTC = (cmd & DDRC_MASK);
+  PORTB = ((cmd >> 2) & DDRB_MASK);
+  // RS = 0, E = 1 - this is command, raising
+  PORTD = (B00000001 & DDRD_MASK);
+  wt(PCWAIT);
+  // E = 0 will trigger command execution
+  PORTD = (B00000000 & DDRD_MASK);
+  wt(wait_time);  
 }
 
 // 350 nsec per loop
